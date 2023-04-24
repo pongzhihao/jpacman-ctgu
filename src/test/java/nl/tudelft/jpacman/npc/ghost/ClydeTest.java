@@ -29,8 +29,7 @@ public class ClydeTest {
     private GhostMapParser ghostMapParser;
     private PlayerFactory playerFactory;
 
-    /**
-     * Instantiate the GhostMapParser that will help us with the testing.
+    /**实例化GhostMapParser
      */
     @BeforeEach
     void init() {
@@ -46,13 +45,12 @@ public class ClydeTest {
 
 
     /**
-     * Test in which Clyde is located near PacMan (on 8 squares distance),
-     * so it will try to run away.
+     * 测试中Clyde位于Pacman附近（距离8平方米），它会试图离开
      */
     @Test
     void testTooClose() {
         Level level = ghostMapParser.parseMap(
-            Lists.newArrayList("############", "P       C###", "############")
+            Lists.newArrayList("############", "##P.....C###", "############")
         );
         Player player = playerFactory.createPacMan();
         player.setDirection(Direction.WEST);
@@ -64,13 +62,12 @@ public class ClydeTest {
 
 
     /**
-     * Test in which Clyde is far from PacMan (on 9 squares distance),
-     * so it tries to go towards PacMan.
+     * 测试中，Clyde距离Pacman很远（在9平方米的距离上），它将试图走向吃豆人
      */
     @Test
     void testTooFar() {
         Level level = ghostMapParser.parseMap(
-            Lists.newArrayList("############", "P        C##", "############")
+            Lists.newArrayList("############", "P.........C#", "############")
         );
         Player player = playerFactory.createPacMan();
         player.setDirection(Direction.EAST);
@@ -81,12 +78,12 @@ public class ClydeTest {
     }
 
     /**
-     * Bad weather test case, in which there isn't a player playing the current level.
+     * 没有Pacman
      */
     @Test
-    void testNoPlayer() {
+    void testNoPacman() {
         Level level = ghostMapParser.parseMap(
-            Lists.newArrayList("#####", "##C  ", "     ")
+            Lists.newArrayList("#####", "##C..", "     ")
         );
         Clyde clyde = Navigation.findUnitInBoard(Clyde.class, level.getBoard());
 
@@ -95,12 +92,12 @@ public class ClydeTest {
 
 
     /**
-     * Bad weather test case, in which there isn't a valid path between PacMan and Clyde.
+     * PacMan和Clyde之间有障碍，没有路径
      */
     @Test
-    void testNoPathBetweenPlayerAndClyde() {
+    void testNoPathBetweenPacmanAndClyde() {
         Level level = ghostMapParser.parseMap(
-            Lists.newArrayList("######", "#P##C ", " ###  ")
+            Lists.newArrayList("######", "#P##C.", " ###  ")
         );
         Player player = playerFactory.createPacMan();
         player.setDirection(Direction.EAST);
