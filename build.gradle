@@ -106,7 +106,7 @@ style.excludeClasses = [
 jacocoTestReport {
     executionData tasks.withType(Test)
     reports {
-        csv.enabled true
+        csv.enabled(true)
     }
 }
 

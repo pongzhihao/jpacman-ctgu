@@ -77,7 +77,7 @@ public class MovePlayerSteps {
 	@Then("I earn the points for the pellet,")
 	public void i_earn_the_points_for_the_pellet() {
 		assertThat(score).isEqualTo(0);
-		assertThat(player.getScore()).isEqualTo(score+pellet.getValue());
+		assertThat(player.getScore()).isEqualTo(score + pellet.getValue());
 	}
 
 	@Then("the pellet disappears from that square.")

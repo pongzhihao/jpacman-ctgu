@@ -48,13 +48,13 @@ public class InkyTest {
 
 
     /**
-     * Test case when no Blinky insight. (Bad Weather Case).
+     * 没有Blinky对象
      */
     @Test
     void testNoBlinky() {
 
         Level level = ghostMapParser.parseMap(
-            Lists.newArrayList("PI ", "   ", "   ")
+            Lists.newArrayList("P.I", "###", "###")
         );
         Player player = playerFactory.createPacMan();
         player.setDirection(Direction.WEST);
@@ -65,14 +65,14 @@ public class InkyTest {
     }
 
     /**
-     * Test case when there's no path between Inky and Player. (Bad Weather Case).
+     * Pacman和Inky之间没有通路
      */
     @Test
-    void testNoPath() {
+    void testNoPathBetweenPacmanAndInky() {
 
         List<String> grid = new ArrayList<>();
         grid.add("#######################");
-        grid.add("#.........P#......I..B#");
+        grid.add("##########P......#I..B#");
         grid.add("#######################");
 
         Level level = ghostMapParser.parseMap(grid);
@@ -87,12 +87,12 @@ public class InkyTest {
 
 
     /**
-     * Test case when there isn't a player on the board. (Bad Weather Case).
+     * 没有Pacman对象
      */
     @Test
-    void testNoPlayer() {
+    void testNoPacman() {
         Level level = ghostMapParser.parseMap(
-            Lists.newArrayList("####", "B  I", "####")
+            Lists.newArrayList("#####", "#B.I#", "#####")
         );
         Inky inky = Navigation.findUnitInBoard(Inky.class, level.getBoard());
 
@@ -101,14 +101,14 @@ public class InkyTest {
 
 
     /**
-     * Good weather case, Inky follows Pacman and Blinky is behind it.
+     * Inky跟在Pacman后面，Blinky在后面。
      */
     @Test
-    void testGoTowardsPlayer() {
+    void testGoTowardsPacman() {
 
         List<String> grid = new ArrayList<>();
         grid.add("#######################");
-        grid.add("#          P    B   I #");
+        grid.add("######.....P....B...I.#");
         grid.add("#######################");
 
         Level level = ghostMapParser.parseMap(grid);
@@ -121,14 +121,14 @@ public class InkyTest {
 
 
     /**
-     * Good Weather case. Inky moves away properly when is standing in front Pacman.
+     * 当Inky站在Pacman面前时，他会离开。
      */
     @Test
     void testInkyMovesAway() {
 
         List<String> grid = new ArrayList<>();
         grid.add("#######################");
-        grid.add("#      B P  I         #");
+        grid.add("##.....B.P.I.....######");
         grid.add("#######################");
 
         Level level = ghostMapParser.parseMap(grid);
